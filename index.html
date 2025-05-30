@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triad - Premium Digital Marketing Excellence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="theme-light" data-scroll="0">
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-nav" aria-label="Skip to main content">Skip to main content</a>
+    
+    <!-- Critical Loading Skeleton -->
+    <div class="loading-skeleton" id="loadingSkeleton" aria-hidden="true">
+        <div class="skeleton-nav"></div>
+        <div class="skeleton-hero"></div>
+        <div class="skeleton-content"></div>
+    </div>
+
+    <!-- Navigation with Glassmorphism -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo-container">
+                    <div class="logo-icon" aria-hidden="true"></div>
+                    <span class="logo-text">Triad</span>
+                    <span class="logo-subtitle">by Tringapps</span>
+                </div>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#hero" class="nav-link active" data-scroll-target="hero">
+                    <span class="nav-link-text">Home</span>
+                    <div class="nav-link-indicator" aria-hidden="true"></div>
+                </a>
+                <a href="#services" class="nav-link" data-scroll-target="services">
+                    <span class="nav-link-text">Services</span>
+                    <div class="nav-link-indicator" aria-hidden="true"></div>
+                </a>
+                <a href="#about" class="nav-link" data-scroll-target="about">
+                    <span class="nav-link-text">About</span>
+                    <div class="nav-link-indicator" aria-hidden="true"></div>
+                </a>
+                <a href="#results" class="nav-link" data-scroll-target="results">
+                    <span class="nav-link-text">Results</span>
+                    <div class="nav-link-indicator" aria-hidden="true"></div>
+                </a>
+                <a href="#contact" class="nav-link" data-scroll-target="contact">
+                    <span class="nav-link-text">Contact</span>
+                    <div class="nav-link-indicator" aria-hidden="true"></div>
+                </a>
+            </div>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section with Parallax -->
+        <section id="hero" class="hero-section" role="banner">
+            <div class="hero-background">
+                <div class="hero-gradient" aria-hidden="true"></div>
+                <div class="hero-particles" aria-hidden="true">
+                    <div class="particle" style="--delay: 0s; --duration: 20s;"></div>
+                    <div class="particle" style="--delay: 5s; --duration: 25s;"></div>
+                    <div class="particle" style="--delay: 10s; --duration: 30s;"></div>
+                </div>
+            </div>
+            
+            <div class="hero-container">
+                <div class="hero-content">                    
+                    <h1 class="hero-title" data-animate="fadeInUp" data-delay="200">
+                        <span class="title-line">Converting Search Results</span>
+                        <span class="title-line gradient-text">Into Revenue</span>
+                        <span class="title-line">With Triad</span>
+                    </h1>
+                    
+                    <p class="hero-description" data-animate="fadeInUp" data-delay="400">
+                        Get found by the right audience at the right time. We transform search intent into real business growth through proven SEO strategies, engaging content, and social media mastery.
+                    </p>
+                    
+                    <div class="hero-cta" data-animate="fadeInUp" data-delay="600">
+                        <button class="cta-primary" id="ctaPrimary">
+                            <span class="cta-text">Start Your Growth Journey</span>
+                            <div class="cta-icon" aria-hidden="true">
+                                <i class="fas fa-rocket"></i>   
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hero-visual" data-animate="fadeInRight" data-delay="400">
+                    <div class="visual-container">
+                        <div class="floating-card card-1" data-tilt>
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="card-content">
+                                <div class="card-title">Conversion Rates</div>
+                                <div class="card-value">80%</div>
+                            </div>
+                        </div>
+                        <div class="floating-card card-2" data-tilt>
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                            <div class="card-content">
+                                <div class="card-title">Increase in Sales from SEO & Content Marketing</div>
+                                <div class="card-value">73%</div>
+                                
+                            </div>
+                        </div>
+                        <div class="floating-card card-3" data-tilt>
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">Recovery from Cart Abandonment</div>
+                                <div class="card-value">48%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's Triad For You Section -->
+        <section id="what-is-triad" class="section">
+            <div class="section-container">
+                <div class="what-is-triad-content-grid">
+                    <div class="what-is-triad-layout">
+                        <div class="what-is-triad-left">
+                            <div class="section-header-left">
+                                <h2 class="section-title">What's Triad For You?</h2>
+                                <p class="section-description">Solution? No, it's a <span class="gradient-text">Growth Journey.</span></p>
+                            </div>
+                        </div>
+                        <div class="what-is-triad-right">
+                            <div class="what-is-triad-text">
+                                <p>A potential customer is on their phone, urgently searching for a service you offer. They need it now, but your brand doesn't appear on the first page of Google. Instead, they click on your competitor, and you've lost a sale just like that.</p>
+                                <p>It's a common pain point for growing businesses: being great at what you do, but invisible online. That's where Triad steps in. We combine smart SEO, persuasive content, and social media strategies to ensure your brand gets seen by the right people at the right time, so opportunities stop slipping away.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section with Progressive Disclosure and Vector Animations -->
+        <section id="services" class="services-section" role="region" aria-labelledby="services-title">
+            <!-- Animated Vector Background -->
+            <div class="vector-background" aria-hidden="true">
+                <svg class="vector-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3"/>
+                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:0.1"/>
+                        </linearGradient>
+                        <linearGradient id="lineGradient2" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.3"/>
+                            <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Animated Lines -->
+                    <path class="vector-line line-1" d="M0,200 Q300,100 600,200 T1200,150" stroke="url(#lineGradient1)" stroke-width="2" fill="none"/>
+                    
+                    <!-- Animated Dots -->
+                    <circle class="vector-dot dot-1" cx="300" cy="150" r="4" fill="#6366f1" opacity="0.6"/>
+                    <circle class="vector-dot dot-2" cx="600" cy="200" r="3" fill="#ec4899" opacity="0.5"/>
+                    <circle class="vector-dot dot-3" cx="900" cy="180" r="5" fill="#10b981" opacity="0.7"/>
+                    <circle class="vector-dot dot-4" cx="400" cy="350" r="3" fill="#f59e0b" opacity="0.6"/>
+                    <circle class="vector-dot dot-5" cx="800" cy="400" r="4" fill="#6366f1" opacity="0.5"/>
+                    
+                </svg>
+            </div>
+            
+            <div class="section-container">
+                <div class="section-header" data-animate="fadeInUp">
+                    <div class="section-badge">
+                        <span class="badge-icon" aria-hidden="true">🚀</span>
+                        <span>Our Expertise</span>
+                    </div>
+                    <h2 id="services-title" class="section-title">
+                        <span class="title-line">Comprehensive Digital</span>
+                        <span class="title-line gradient-text">Marketing Solutions</span>
+                    </h2>
+                    <p class="section-description">
+                        We deliver end-to-end digital marketing services that drive growth, 
+                        enhance brand visibility, and maximize your return on investment.
+                    </p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- SEO Service -->
+                    <div class="service-card" data-service="seo">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>SEO</h3>
+                        <p class="service-tagline" style="color:#6366f1;">Rank Higher, Stay Visible</p>
+                        <p class="service-description">We understand the challenge of being buried on the second page of search results. Triad's SEO service isn't just about ranking higher—it's about being visible where it matters.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Website Audits</li>
+                            <li><i class="fas fa-check"></i> Site Optimization</li>
+                            <li><i class="fas fa-check"></i> On-Page SEO</li>
+                            <li><i class="fas fa-check"></i> Off-Page SEO</li>
+                            <li><i class="fas fa-check"></i> Technical Website Analysis</li>
+                            <li><i class="fas fa-check"></i> Website Optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Content Service -->
+                    <div class="service-card" data-service="content">
+                        <div class="service-icon" style="background:linear-gradient(135deg,#10b981,#059669);">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3>Content</h3>
+                        <p class="service-tagline" style="color:#10b981;">Speaks, Ranks, and Resonates</p>
+                        <p class="service-description">Triad delivers SEO-driven, keyword-optimized content designed to rank, attract, and convert. From high-performance blogs to targeted landing page content, every piece is structured for maximum organic visibility.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Content Audits</li>
+                            <li><i class="fas fa-check"></i> Content Strategy Development</li>
+                            <li><i class="fas fa-check"></i> SEO-Optimized Content Creation</li>
+                            <li><i class="fas fa-check"></i> Content Gap Analysis</li>
+                            <li><i class="fas fa-check"></i> Content Authority Building</li>
+                            <li><i class="fas fa-check"></i> Semantic Optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Media Service -->
+                    <div class="service-card" data-service="social">
+                        <div class="service-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Social Media Marketing</h3>
+                        <p class="service-tagline" style="color:#f59e0b;">Engage, Amplify, Win</p>
+                        <p class="service-description">Building a community on social media is no easy feat. But with Triad's SMM, we turn likes and shares into loyal customers, driving engagement that leads to real business growth.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Social Media Strategy Development</li>
+                            <li><i class="fas fa-check"></i> Social Media Accounts Analysis</li>
+                            <li><i class="fas fa-check"></i> Audience Segmentation and Targeting</li>
+                            <li><i class="fas fa-check"></i> Performance Tracking</li>
+                            <li><i class="fas fa-check"></i> Trend Analysis</li>
+                            <li><i class="fas fa-check"></i> Content Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section with Timeline -->
+        <section id="process" class="process-section" role="region" aria-labelledby="process-title">
+            <div class="section-container">
+                <div class="section-header" data-animate="fadeInUp">
+                    <div class="section-badge">
+                        <span class="badge-icon" aria-hidden="true">⚡</span>
+                        <span>Our Methodology</span>
+                    </div>
+                    <h2 id="process-title" class="section-title">
+                        <span class="title-line">Strategic Process That</span>
+                        <span class="title-line gradient-text">Delivers Results</span>
+                    </h2>
+                </div>
+                <div class="process-timeline vertical-timeline">
+                    <div class="process-step" data-step="1">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Discover</h3>
+                            <p>We dive deep into your business goals, target audience, and competitive landscape to craft a comprehensive digital marketing strategy.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="process-step" data-step="2">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Strategize</h3>
+                            <p>We build a customized, actionable plan that integrates SEO, SMM, and Content, ensuring each strategy aligns seamlessly with your company's objectives and market position. Our strategic and flexible approach adapts to evolving business goals.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chess"></i>
+                        </div>
+                    </div>
+                    <div class="process-step" data-step="3">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Execute</h3>
+                            <p>Our approach focuses on executing three key operations simultaneously: Content, SEO, and Social Media Optimization. Content sits at the core of this strategy, seamlessly integrating with all other elements to drive cohesive and impactful results.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                    <div class="process-step" data-step="4">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>Optimize</h3>
+                            <p>We provide detailed weekly and monthly reports, tracking key performance indicators and showing the direct impact on your business. Our ongoing analysis enables us to adjust strategies in real-time, ensuring consistent progress and maximizing ROI.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who Are We Section - Left Aligned with Illustration -->
+        <section id="about" class="about-section">
+            <div class="section-container">
+                <div class="about-content-grid">
+                    <div class="about-text-content-title">
+                        <div class="section-header-left">
+                            <h2 class="section-title">Who Are We?</h2>
+                            <h3 class="section-subtitle">Our Expertise Beyond Marketing</h3>
+                        </div>
+                    </div>
+
+                    <div class="about-text-content">
+                        <div class="about-text">
+                            <p><span class="gradient-text">Tringapps Inc.</span> is a global leader in building cutting-edge SaaS products. With a team of 500+ experts worldwide, we specialize in end-to-end product engineering—from intuitive UI/UX design to robust cloud solutions.
+Our strengths include:
+Award-winning UI/UX specialists
+Certified experts in AWS, Google Cloud & Azure
+Agile teams of solution architects & full-stack engineers
+Scalable QA automation for high-performance delivery
+At Tringapps, innovation drives everything we do.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats-grid">
+                    <div class="about-stat-card">
+                        <div class="about-stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="about-stat-number">15+</div>
+                        <div class="about-stat-label">Years of Experience</div>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="about-stat-icon"><i class="fas fa-project-diagram"></i></div>
+                        <div class="about-stat-number">150+</div>
+                        <div class="about-stat-label">Experts in the Field</div>
+                    </div>
+                    <div class="about-stat-card">
+                        <div class="about-stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="about-stat-number">15+</div>
+                        <div class="about-stat-label">Ongoing Projects</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="results-section" role="region" aria-labelledby="results-title">
+            <div class="section-container">
+                <div class="section-header" data-animate="fadeInUp">
+                    <div class="section-badge">
+                        <span class="badge-icon" aria-hidden="true">📊</span>
+                        <span>Proven Results</span>
+                    </div>
+                    <h2 id="results-title" class="section-title">
+                        <span class="title-line">Success Stories &</span>
+                        <span class="title-line gradient-text">Client Achievements</span>
+                    </h2>
+                </div>
+
+                <div class="results-grid" data-animate="staggerChildren">
+                    <div class="result-card" data-animate="fadeInUp">
+                        <div class="result-header">
+                            <div class="result-icon">
+                                <img src="/public/assets/fraxioned.png" alt="Fraxioned Logo" class="result-logo">
+                            </div>
+                            <div class="result-category">E-commerce</div>
+                        </div>
+                        <h3 class="result-title">Fraxioned</h3>
+                        <p class="result-description">
+                            Boosted Impressions 3X With Content & SEO Strategies, 
+                            transforming their digital presence and market reach.
+                        </p>
+                        <div class="result-metrics">
+                            <div class="metric">
+                                <div class="metric-value">3x</div>
+                                <div class="metric-label">Impressions Growth</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">+200%</div>
+                                <div class="metric-label">Organic Reach</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" data-animate="fadeInUp" data-delay="200">
+                        <div class="result-header">
+                            <div class="result-icon">
+                                <img src="/public/assets/calnet.png" alt="Adams Logo" class="result-logo">
+                            </div>
+                            <div class="result-category">Digital Marketing</div>
+                        </div>
+                        <h3 class="result-title">Calnet</h3>
+                        <p class="result-description">
+                            Improved Clicks by 8% and Impressions by 9% Within Just 2 Months, 
+                            achieving rapid growth through targeted strategies.
+                        </p>
+                        <div class="result-metrics">
+                            <div class="metric">
+                                <div class="metric-value">+8%</div>
+                                <div class="metric-label">Click Rate</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">+9%</div>
+                                <div class="metric-label">Impressions</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" data-animate="fadeInUp" data-delay="400">
+                        <div class="result-header">
+                            <div class="result-icon">
+                                <img src="/public/assets/adams.png" alt="Adams Logo" class="result-logo">
+                            </div>
+                            <div class="result-category">Retail</div>
+                        </div>
+                        <h3 class="result-title">Adams</h3>
+                        <p class="result-description">
+                            Recovered $48 million from Abandoned Carts through an end-to-end marketing approach, 
+                            significantly boosting revenue and customer retention.
+                        </p>
+                        <div class="result-metrics">
+                            <div class="metric">
+                                <div class="metric-value">$48M</div>
+                                <div class="metric-label">Recovered Revenue</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">+35%</div>
+                                <div class="metric-label">Conversion Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section" role="region" aria-labelledby="contact-title">
+            <div class="section-container">
+                <div class="contact-grid">
+                    <div class="contact-info" data-animate="fadeInLeft">
+                        <div class="section-badge">
+                            <span class="badge-icon" aria-hidden="true">💬</span>
+                            <span>Let's Connect</span>
+                        </div>
+                        <h2 id="contact-title" class="section-title">
+                            <span class="title-line">Ready to Transform</span>
+                            <span class="title-line gradient-text">Your Business?</span>
+                        </h2>
+                        <p class="section-description">
+                            Let's discuss how we can help you achieve your digital marketing goals. 
+                            Get in touch for a free consultation and strategy session.
+                        </p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-content">
+                                    <div class="method-label">Email Us</div>
+                                    <div class="method-value">pavithra@tringtriadmarketing.com</div>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-content">
+                                    <div class="method-label">Call Us</div>
+                                    <div class="method-value">+1 (555) 123-4567</div>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-content">
+                                    <div class="method-label">Visit Us</div>
+                                    <div class="method-value">123 Digital Avenue, Tech City</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container" data-animate="fadeInRight">
+                        <form class="contact-form" id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-input" required aria-describedby="name-error">
+                                <div class="form-error" id="name-error" role="alert" aria-live="polite"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" required aria-describedby="email-error">
+                                <div class="form-error" id="email-error" role="alert" aria-live="polite"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company" class="form-label">Company Name</label>
+                                <input type="text" id="company" name="company" class="form-input" required aria-describedby="company-error">
+                                <div class="form-error" id="company-error" role="alert" aria-live="polite"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Tell us about your project goals..." required aria-describedby="message-error"></textarea>
+                                <div class="form-error" id="message-error" role="alert" aria-live="polite"></div>
+                            </div>
+                            
+                            <button type="submit" class="form-submit" id="submitButton">
+                                <span class="submit-text">Send Message</span>
+                                <div class="submit-icon">
+                                    <i class="fas fa-paper-plane"></i>
+                                </div>
+                                <div class="submit-loader" aria-hidden="true">
+                                    <div class="loader-spinner"></div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+            <!-- <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <div class="logo-icon" aria-hidden="true"></div>
+                        <span class="logo-text">Triad</span>
+                        <span class="logo-subtitle">by Tringapps</span>
+                    </div>
+                        <p class="footer-description">
+                            Transforming businesses through innovative digital marketing strategies 
+                            that deliver measurable results and sustainable growth.
+                        </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Services</h4>
+                        <ul class="footer-list">
+                            <li><a href="#services" class="footer-link">SEO Optimization</a></li>
+                            <li><a href="#services" class="footer-link">Content Marketing</a></li>
+                            <li><a href="#services" class="footer-link">Social Media</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Company</h4>
+                        <ul class="footer-list">
+                            <li><a href="#process" class="footer-link">Our Process</a></li>
+                            <li><a href="#results" class="footer-link">Case Studies</a></li>
+                            <li><a href="#contact" class="footer-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4 class="footer-title">Resources</h4>
+                        <ul class="footer-list">
+                            <li><a href="#contact" class="footer-link">Blog</a></li>
+                            <li><a href="#contact" class="footer-link">Whitepapers</a></li>
+                            <li><a href="#contact" class="footer-link">Industry Reports</a></li>
+                            <li><a href="#contact" class="footer-link">Webinars</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <div class="logo-icon" aria-hidden="true"></div>
+                        <span class="logo-text">Triad</span>
+                        <span class="logo-subtitle">by Tringapps</span>
+                    </div>
+                        <!-- <p class="footer-description">
+                            Transforming businesses through innovative digital marketing strategies 
+                            that deliver measurable results and sustainable growth.
+                        </p> -->
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Triad by Tringapps. All rights reserved.</p>
+                </div>
+                <!-- <div class="footer-social">
+                    <a href="https://in.linkedin.com/company/tringapps-inc" class="social-link" aria-label="Follow us on LinkedIn">
+                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://x.com/tring_apps" class="social-link" aria-label="Follow us on Twitter">
+                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.instagram.com/tringapps" class="social-link" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://www.facebook.com/tringsocial/" class="social-link" aria-label="Follow us on Facebook">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </a>
+                </div> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
