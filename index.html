@@ -10,10 +10,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="public/assets/tring.png">
 </head>
 <body class="theme-light" data-scroll="0">
     <!-- Skip Navigation for Accessibility -->
-    <a href="#main-content" class="skip-nav" aria-label="Skip to main content">Skip to main content</a>
+    <!-- <a href="#main-content" class="skip-nav" aria-label="Skip to main content">Skip to main content</a> -->
     
     <!-- Critical Loading Skeleton -->
     <div class="loading-skeleton" id="loadingSkeleton" aria-hidden="true">
@@ -26,11 +27,13 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
-                <div class="logo-container">
-                    <div class="logo-icon" aria-hidden="true"></div>
-                    <span class="logo-text">Triad</span>
-                    <span class="logo-subtitle">by Tringapps</span>
-                </div>
+                <a href="https://tringapps.com/" target="_blank" rel="noopener noreferrer" aria-label="Tringapps Home">
+                    <div class="logo-container">
+                        <img src="public/assets/tring.png" alt="Triad Logo" class="logo-img" style="width:32px;height:32px;vertical-align:middle;">
+                        <span class="logo-text">Triad</span>
+                        <span class="logo-subtitle">by Tringapps</span>
+                    </div>
+                </a>
             </div>
             
             <div class="nav-links" id="navLinks">
@@ -56,7 +59,7 @@
                 </a>
             </div>
 
-            <div class="nav-controls">
+            <!-- <div class="nav-controls">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-sun light-icon"></i>
                     <i class="fas fa-moon dark-icon"></i>
@@ -66,7 +69,7 @@
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                 </button>
-            </div>
+            </div> -->
         </div>
     </nav>
 
@@ -143,7 +146,10 @@
                     <div class="what-is-triad-layout">
                         <div class="what-is-triad-left">
                             <div class="section-header-left">
-                                <h2 class="section-title">What's Triad For You?</h2>
+                                <h2 class="section-title">
+                                    <span class="triad-main">What's Triad</span>
+                                    <span class="triad-sub">For You?</span>
+                                </h2>
                                 <p class="section-description">Solution? No, it's a <span class="gradient-text">Growth Journey.</span></p>
                             </div>
                         </div>
@@ -162,7 +168,7 @@
         <section id="services" class="services-section" role="region" aria-labelledby="services-title">
             <!-- Animated Vector Background -->
             <div class="vector-background" aria-hidden="true">
-                <svg class="vector-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                <svg class="vector-lines" viewBox="100 0 1500 800" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.3"/>
@@ -189,10 +195,6 @@
             
             <div class="section-container">
                 <div class="section-header" data-animate="fadeInUp">
-                    <div class="section-badge">
-                        <span class="badge-icon" aria-hidden="true">🚀</span>
-                        <span>Our Expertise</span>
-                    </div>
                     <h2 id="services-title" class="section-title">
                         <span class="title-line">Comprehensive Digital</span>
                         <span class="title-line gradient-text">Marketing Solutions</span>
@@ -213,12 +215,12 @@
                         <p class="service-tagline" style="color:#6366f1;">Rank Higher, Stay Visible</p>
                         <p class="service-description">We understand the challenge of being buried on the second page of search results. Triad's SEO service isn't just about ranking higher—it's about being visible where it matters.</p>
                         <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Website Audits</li>
-                            <li><i class="fas fa-check"></i> Site Optimization</li>
-                            <li><i class="fas fa-check"></i> On-Page SEO</li>
-                            <li><i class="fas fa-check"></i> Off-Page SEO</li>
-                            <li><i class="fas fa-check"></i> Technical Website Analysis</li>
-                            <li><i class="fas fa-check"></i> Website Optimization</li>
+                            <li><span class="service-dot"></span> Website Audits</li>
+                            <li><span class="service-dot"></span> Site Optimization</li>
+                            <li><span class="service-dot"></span> On-Page SEO</li>
+                            <li><span class="service-dot"></span> Off-Page SEO</li>
+                            <li><span class="service-dot"></span> Technical Website Analysis</li>
+                            <li><span class="service-dot"></span> Website Optimization</li>
                         </ul>
                     </div>
 
@@ -231,12 +233,12 @@
                         <p class="service-tagline" style="color:#10b981;">Speaks, Ranks, and Resonates</p>
                         <p class="service-description">Triad delivers SEO-driven, keyword-optimized content designed to rank, attract, and convert. From high-performance blogs to targeted landing page content, every piece is structured for maximum organic visibility.</p>
                         <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Content Audits</li>
-                            <li><i class="fas fa-check"></i> Content Strategy Development</li>
-                            <li><i class="fas fa-check"></i> SEO-Optimized Content Creation</li>
-                            <li><i class="fas fa-check"></i> Content Gap Analysis</li>
-                            <li><i class="fas fa-check"></i> Content Authority Building</li>
-                            <li><i class="fas fa-check"></i> Semantic Optimization</li>
+                            <li><span class="service-dot"></span> Content Audits</li>
+                            <li><span class="service-dot"></span> Content Strategy Development</li>
+                            <li><span class="service-dot"></span> SEO-Optimized Content Creation</li>
+                            <li><span class="service-dot"></span> Content Gap Analysis</li>
+                            <li><span class="service-dot"></span> Content Authority Building</li>
+                            <li><span class="service-dot"></span> Semantic Optimization</li>
                         </ul>
                     </div>
 
@@ -249,12 +251,12 @@
                         <p class="service-tagline" style="color:#f59e0b;">Engage, Amplify, Win</p>
                         <p class="service-description">Building a community on social media is no easy feat. But with Triad's SMM, we turn likes and shares into loyal customers, driving engagement that leads to real business growth.</p>
                         <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Social Media Strategy Development</li>
-                            <li><i class="fas fa-check"></i> Social Media Accounts Analysis</li>
-                            <li><i class="fas fa-check"></i> Audience Segmentation and Targeting</li>
-                            <li><i class="fas fa-check"></i> Performance Tracking</li>
-                            <li><i class="fas fa-check"></i> Trend Analysis</li>
-                            <li><i class="fas fa-check"></i> Content Optimization</li>
+                            <li><span class="service-dot"></span> Social Media Strategy Development</li>
+                            <li><span class="service-dot"></span> Social Media Accounts Analysis</li>
+                            <li><span class="service-dot"></span> Audience Segmentation and Targeting</li>
+                            <li><span class="service-dot"></span> Performance Tracking</li>
+                            <li><span class="service-dot"></span> Trend Analysis</li>
+                            <li><span class="service-dot"></span> Content Optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -265,10 +267,6 @@
         <section id="process" class="process-section" role="region" aria-labelledby="process-title">
             <div class="section-container">
                 <div class="section-header" data-animate="fadeInUp">
-                    <div class="section-badge">
-                        <span class="badge-icon" aria-hidden="true">⚡</span>
-                        <span>Our Methodology</span>
-                    </div>
                     <h2 id="process-title" class="section-title">
                         <span class="title-line">Strategic Process That</span>
                         <span class="title-line gradient-text">Delivers Results</span>
@@ -333,12 +331,13 @@
                     <div class="about-text-content">
                         <div class="about-text">
                             <p><span class="gradient-text">Tringapps Inc.</span> is a global leader in building cutting-edge SaaS products. With a team of 500+ experts worldwide, we specialize in end-to-end product engineering—from intuitive UI/UX design to robust cloud solutions.
-Our strengths include:
-Award-winning UI/UX specialists
-Certified experts in AWS, Google Cloud & Azure
-Agile teams of solution architects & full-stack engineers
-Scalable QA automation for high-performance delivery
-At Tringapps, innovation drives everything we do.</p>
+                            Our strengths include:
+                            Award-winning UI/UX specialists
+                            Certified experts in AWS, Google Cloud & Azure
+                            Agile teams of solution architects & full-stack engineers
+                            Scalable QA automation for high-performance delivery
+                            At Tringapps, innovation drives everything we do.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -366,13 +365,8 @@ At Tringapps, innovation drives everything we do.</p>
         <section id="results" class="results-section" role="region" aria-labelledby="results-title">
             <div class="section-container">
                 <div class="section-header" data-animate="fadeInUp">
-                    <div class="section-badge">
-                        <span class="badge-icon" aria-hidden="true">📊</span>
-                        <span>Proven Results</span>
-                    </div>
                     <h2 id="results-title" class="section-title">
-                        <span class="title-line">Success Stories &</span>
-                        <span class="title-line gradient-text">Client Achievements</span>
+                        <span class="title-line gradient-text">Success Stories</span>
                     </h2>
                 </div>
 
@@ -382,7 +376,7 @@ At Tringapps, innovation drives everything we do.</p>
                             <div class="result-icon">
                                 <img src="/public/assets/fraxioned.png" alt="Fraxioned Logo" class="result-logo">
                             </div>
-                            <div class="result-category">E-commerce</div>
+                            <div class="result-category">Real Estate</div>
                         </div>
                         <h3 class="result-title">Fraxioned</h3>
                         <p class="result-description">
@@ -406,7 +400,7 @@ At Tringapps, innovation drives everything we do.</p>
                             <div class="result-icon">
                                 <img src="/public/assets/calnet.png" alt="Adams Logo" class="result-logo">
                             </div>
-                            <div class="result-category">Digital Marketing</div>
+                            <div class="result-category">ISP</div>
                         </div>
                         <h3 class="result-title">Calnet</h3>
                         <p class="result-description">
@@ -430,7 +424,7 @@ At Tringapps, innovation drives everything we do.</p>
                             <div class="result-icon">
                                 <img src="/public/assets/adams.png" alt="Adams Logo" class="result-logo">
                             </div>
-                            <div class="result-category">Retail</div>
+                            <div class="result-category">Firearms Manufacturer</div>
                         </div>
                         <h3 class="result-title">Adams</h3>
                         <p class="result-description">
@@ -457,10 +451,6 @@ At Tringapps, innovation drives everything we do.</p>
             <div class="section-container">
                 <div class="contact-grid">
                     <div class="contact-info" data-animate="fadeInLeft">
-                        <div class="section-badge">
-                            <span class="badge-icon" aria-hidden="true">💬</span>
-                            <span>Let's Connect</span>
-                        </div>
                         <h2 id="contact-title" class="section-title">
                             <span class="title-line">Ready to Transform</span>
                             <span class="title-line gradient-text">Your Business?</span>
@@ -486,7 +476,7 @@ At Tringapps, innovation drives everything we do.</p>
                                 </div>
                                 <div class="method-content">
                                     <div class="method-label">Call Us</div>
-                                    <div class="method-value">+1 (555) 123-4567</div>
+                                    <div class="method-value">+91 9677701425</div>
                                 </div>
                             </div>
                             <div class="contact-method">
@@ -495,7 +485,11 @@ At Tringapps, innovation drives everything we do.</p>
                                 </div>
                                 <div class="method-content">
                                     <div class="method-label">Visit Us</div>
-                                    <div class="method-value">123 Digital Avenue, Tech City</div>
+                                    <div class="method-value">Ocean Trinity,
+                                        SIDCO Industrial Estate, 
+                                        Chennai - 32, 
+                                        Tamil Nadu
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -592,11 +586,13 @@ At Tringapps, innovation drives everything we do.</p>
             
             <div class="footer-bottom">
                 <div class="footer-brand">
-                    <div class="logo-container">
-                        <div class="logo-icon" aria-hidden="true"></div>
-                        <span class="logo-text">Triad</span>
-                        <span class="logo-subtitle">by Tringapps</span>
-                    </div>
+                    <a href="https://tringapps.com/" target="_blank" rel="noopener noreferrer" aria-label="Tringapps Home">
+                        <div class="logo-container">
+                            <img src="public/assets/tring.png" alt="Triad Logo" class="logo-img" style="width:32px;height:32px;vertical-align:middle;">
+                            <span class="logo-text">Triad</span>
+                            <span class="logo-subtitle">by Tringapps</span>
+                        </div>
+                    </a>
                         <!-- <p class="footer-description">
                             Transforming businesses through innovative digital marketing strategies 
                             that deliver measurable results and sustainable growth.

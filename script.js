@@ -545,7 +545,7 @@ class TriadWebsite {
     const jsonData = {};
     formData.forEach((value, key) => { jsonData[key] = value });
 
-    const backendUrl = 'http://localhost:3000/api/send-email';
+    const backendUrl = 'https://n5bnphhv-3000.inc1.devtunnels.ms/api/send-email';
 
     try {
       const response = await fetch(backendUrl, {
