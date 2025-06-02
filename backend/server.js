@@ -17,6 +17,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, '../public')));
+
 // Function to handle Excel file operations
 const handleExcelFile = (submission) => {
   const excelFilePath = path.join(__dirname, 'contact_submissions.xlsx');
@@ -136,6 +139,11 @@ app.get('/download/submission', (req, res) => {
   res.sendFile(path.join(__dirname, 'submission_download.html'));
 });
 
+// Serve index.html for all other routes (client-side routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
 app.listen(port, () => {
-  console.log(`Email service backend listening at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
