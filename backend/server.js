@@ -11,14 +11,16 @@ const fs = require('fs');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
+app.use('/assets', express.static(path.join(__dirname, '../public/assets')));
 
 // Function to handle Excel file operations
 const handleExcelFile = (submission) => {
@@ -62,6 +64,7 @@ const handleExcelFile = (submission) => {
   XLSX.writeFile(workbook, excelFilePath);
 };
 
+// API endpoint for form submissions
 app.post('/api/send-email', async (req, res) => {
   const { name, email, company, message } = req.body;
 
@@ -83,7 +86,7 @@ app.post('/api/send-email', async (req, res) => {
     secure: process.env.SMTP_SECURE === 'true',
     auth: {
       user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD 
+      pass: process.env.SMTP_PASSWORD
     },
   });
 
@@ -110,7 +113,6 @@ app.post('/api/send-email', async (req, res) => {
   try {
     let info = await transporter.sendMail(mailOptions);
     console.log('Message sent: %s', info.messageId);
-
     res.status(200).json({ success: true, message: 'Email sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
@@ -118,7 +120,7 @@ app.post('/api/send-email', async (req, res) => {
   }
 });
 
-// New endpoint to download Excel file
+// API endpoint to download Excel file
 app.get('/api/download-submissions', (req, res) => {
   const excelFilePath = path.join(__dirname, 'contact_submissions.xlsx');
   
@@ -134,7 +136,7 @@ app.get('/api/download-submissions', (req, res) => {
   });
 });
 
-// Serve the download UI at /download/submission
+// Serve the download UI
 app.get('/download/submission', (req, res) => {
   res.sendFile(path.join(__dirname, 'submission_download.html'));
 });

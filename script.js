@@ -523,59 +523,37 @@ class TriadWebsite {
   }
 
   async handleFormSubmission(form, submitButton) {
-    // Validate all fields
-    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-      if (!this.validateField(input)) {
-        isValid = false;
-      }
-    });
-    
-    if (!isValid) {
-      this.showToast('Please fix the errors above', 'error');
-      return;
-    }
-    
-    // Show loading state
-    submitButton.classList.add('loading');
-    submitButton.disabled = true;
-    
-    // Collect form data
     const formData = new FormData(form);
-    const jsonData = {};
-    formData.forEach((value, key) => { jsonData[key] = value });
-
-    const backendUrl = 'https://www.tringtriadmarketing.com/api/send-email';
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      message: formData.get('message')
+    };
 
     try {
-      const response = await fetch(backendUrl, {
+      submitButton.classList.add('loading');
+      submitButton.disabled = true;
+
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(jsonData),
+        body: JSON.stringify(data)
       });
 
       const result = await response.json();
 
-      if (response.ok) {
-        if (result.success) {
-          this.showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
-          form.reset();
-        } else {
-          // Backend returned success: false
-          this.showToast(result.message || 'Failed to send message.', 'error');
-        }
+      if (result.success) {
+        this.showToast('Message sent successfully!', 'success');
+        form.reset();
       } else {
-        // HTTP error response
-         this.showToast(result.message || `Server responded with status ${response.status}`, 'error');
+        throw new Error(result.message || 'Failed to send message');
       }
-
     } catch (error) {
-      console.error('Error submitting form:', error);
-      this.showToast('Failed to send message. Please check your connection or try again later.', 'error');
+      console.error('Error:', error);
+      this.showToast(error.message || 'Failed to send message. Please try again.', 'error');
     } finally {
       submitButton.classList.remove('loading');
       submitButton.disabled = false;
