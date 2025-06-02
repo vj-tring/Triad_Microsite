@@ -545,14 +545,14 @@ class TriadWebsite {
 
       const result = await response.json();
 
-      if (result.success) {
-        this.showToast('Message sent successfully!', 'success');
-        form.reset();
-      } else {
+      if (!response.ok) {
         throw new Error(result.message || 'Failed to send message');
       }
+
+      this.showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+      form.reset();
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error submitting form:', error);
       this.showToast(error.message || 'Failed to send message. Please try again.', 'error');
     } finally {
       submitButton.classList.remove('loading');
