@@ -4,6 +4,9 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const XLSX = require('xlsx');
+const path = require('path');
+const fs = require('fs');
 
 dotenv.config();
 
@@ -14,12 +17,61 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Function to handle Excel file operations
+const handleExcelFile = (submission) => {
+  const excelFilePath = path.join(__dirname, 'contact_submissions.xlsx');
+  let workbook;
+  let worksheet;
+
+  // Check if file exists
+  if (fs.existsSync(excelFilePath)) {
+    // Read existing workbook
+    workbook = XLSX.readFile(excelFilePath);
+    worksheet = workbook.Sheets['Submissions'];
+  } else {
+    // Create new workbook and worksheet
+    workbook = XLSX.utils.book_new();
+    worksheet = XLSX.utils.json_to_sheet([], {
+      header: ['Timestamp', 'Name', 'Email', 'Company', 'Message']
+    });
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Submissions');
+  }
+
+  // Convert worksheet to JSON
+  const data = XLSX.utils.sheet_to_json(worksheet);
+
+  // Add new submission
+  data.push({
+    Timestamp: new Date().toISOString(),
+    Name: submission.name,
+    Email: submission.email,
+    Company: submission.company || 'N/A',
+    Message: submission.message || 'N/A'
+  });
+
+  // Convert back to worksheet
+  worksheet = XLSX.utils.json_to_sheet(data);
+
+  // Update workbook
+  workbook.Sheets['Submissions'] = worksheet;
+
+  // Write to file
+  XLSX.writeFile(workbook, excelFilePath);
+};
 
 app.post('/api/send-email', async (req, res) => {
   const { name, email, company, message } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ success: false, message: 'Missing required fields (name, email)' });
+  }
+
+  // Save to Excel file
+  try {
+    handleExcelFile({ name, email, company, message });
+  } catch (error) {
+    console.error('Error saving to Excel:', error);
+    // Continue with email sending even if Excel save fails
   }
 
   let transporter = nodemailer.createTransport({
@@ -61,6 +113,27 @@ app.post('/api/send-email', async (req, res) => {
     console.error('Error sending email:', error);
     res.status(500).json({ success: false, message: 'Failed to send email. Please try again.' });
   }
+});
+
+// New endpoint to download Excel file
+app.get('/api/download-submissions', (req, res) => {
+  const excelFilePath = path.join(__dirname, 'contact_submissions.xlsx');
+  
+  if (!fs.existsSync(excelFilePath)) {
+    return res.status(404).json({ success: false, message: 'No submissions found' });
+  }
+
+  res.download(excelFilePath, 'contact_submissions.xlsx', (err) => {
+    if (err) {
+      console.error('Error downloading file:', err);
+      res.status(500).json({ success: false, message: 'Error downloading file' });
+    }
+  });
+});
+
+// Serve the download UI at /download/submission
+app.get('/download/submission', (req, res) => {
+  res.sendFile(path.join(__dirname, 'submission_download.html'));
 });
 
 app.listen(port, () => {

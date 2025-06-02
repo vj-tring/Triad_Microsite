@@ -54,9 +54,11 @@ class TriadWebsite {
 
   preloadCriticalResources() {
     const criticalImages = [
-      '/v2/public/assets/dm.jpg?height=5157&width=3438',
-      '/v2/public/assets/adams.png?height=48&width=48',
-      '/v2/public/assets/fraxioned.png?height=48&width=48'
+      '/public/assets/adams.png?height=50&width=50',
+      '/public/assets/fraxioned.png?height=38&width=44',
+      '/public/assets/calnet.png?height=52&width=22',
+      '/public/assets/tring.png?height=32&width=32'
+
     ];
 
     criticalImages.forEach(src => {
