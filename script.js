@@ -547,7 +547,7 @@ class TriadWebsite {
     const jsonData = {};
     formData.forEach((value, key) => { jsonData[key] = value });
 
-    const backendUrl = 'https://n5bnphhv-3000.inc1.devtunnels.ms/api/send-email';
+    const backendUrl = 'https://www.tringtriadmarketing.com/api/send-email';
 
     try {
       const response = await fetch(backendUrl, {
