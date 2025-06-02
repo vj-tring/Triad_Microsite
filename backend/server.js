@@ -13,8 +13,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000; 
 
+// CORS configuration
+const corsOptions = {
+  origin: ['https://www.tringtriadmarketing.com', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -65,6 +73,9 @@ const handleExcelFile = (submission) => {
 
 // API Routes
 app.post('/api/send-email', async (req, res) => {
+  console.log('Received POST request to /api/send-email');
+  console.log('Request body:', req.body);
+  
   const { name, email, company, message } = req.body;
 
   if (!name || !email) {
@@ -140,6 +151,9 @@ app.get('/api/download-submissions', (req, res) => {
 app.get('/download/submission', (req, res) => {
   res.sendFile(path.join(__dirname, 'submission_download.html'));
 });
+
+// Handle OPTIONS requests for CORS
+app.options('*', cors(corsOptions));
 
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
