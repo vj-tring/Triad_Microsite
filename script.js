@@ -90,7 +90,6 @@ class TriadWebsite {
     
     this.isLoaded = true;
     this.triggerInitialAnimations();
-    this.showToast('Welcome to Triad! 🚀', 'success');
   }
 
   // Vector Animation Setup
@@ -146,29 +145,16 @@ class TriadWebsite {
   // Theme Management with System Preference Detection
   setupThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    
-    // Detect system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Set initial theme
-    const savedTheme = localStorage.getItem('theme') || 
-                      (prefersDark.matches ? 'dark' : 'light');
-    this.setTheme(savedTheme);
-    
-    // Handle theme toggle
+    // Always set to light on load
+    this.setTheme('light');
+
+    // Handle theme toggle (if you want to allow manual switching)
     themeToggle?.addEventListener('click', () => {
       const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
       this.setTheme(newTheme);
       this.triggerThemeTransition();
     });
-    
-    // Listen for system theme changes
-    prefersDark.addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        this.setTheme(e.matches ? 'dark' : 'light');
-      }
-    });
+    // Do NOT listen for system theme changes
   }
 
   setTheme(theme) {
@@ -208,6 +194,14 @@ class TriadWebsite {
     
     let isMenuOpen = false;
     
+    // Initialize nav links
+    const links = navLinks.querySelectorAll('.nav-link');
+    links.forEach(link => {
+      link.style.opacity = '0';
+      link.style.transform = 'translateX(-20px)';
+      link.style.transition = 'all 0.3s ease';
+    });
+    
     mobileToggle.addEventListener('click', () => {
       isMenuOpen = !isMenuOpen;
       this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
@@ -218,6 +212,10 @@ class TriadWebsite {
       if (e.target.classList.contains('nav-link')) {
         isMenuOpen = false;
         this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
+        
+        // Add active state to clicked link
+        links.forEach(link => link.classList.remove('active'));
+        e.target.classList.add('active');
       }
     });
     
@@ -232,6 +230,7 @@ class TriadWebsite {
 
   toggleMobileMenu(isOpen, toggle, menu) {
     const hamburgerLines = toggle.querySelectorAll('.hamburger-line');
+    const navLinks = menu.querySelectorAll('.nav-link');
     
     if (isOpen) {
       menu.classList.add('mobile-open');
@@ -240,6 +239,14 @@ class TriadWebsite {
       hamburgerLines[1].style.opacity = '0';
       hamburgerLines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
       toggle.setAttribute('aria-expanded', 'true');
+      
+      // Animate nav links with stagger effect
+      navLinks.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = '1';
+          link.style.transform = 'translateX(0)';
+        }, index * 100);
+      });
     } else {
       menu.classList.remove('mobile-open');
       toggle.classList.remove('active');
@@ -247,6 +254,12 @@ class TriadWebsite {
       hamburgerLines[1].style.opacity = '';
       hamburgerLines[2].style.transform = '';
       toggle.setAttribute('aria-expanded', 'false');
+      
+      // Reset nav links
+      navLinks.forEach(link => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateX(-20px)';
+      });
     }
   }
 
@@ -913,14 +926,40 @@ class TriadWebsite {
     // Adjust animations based on screen size
     if (isMobile) {
       document.body.classList.add('mobile');
+      // Disable floating animations on mobile
+      const floatingCards = document.querySelectorAll('.floating-card');
+      floatingCards.forEach(card => {
+        card.style.animation = 'none';
+        card.style.transform = 'none';
+      });
     } else {
       document.body.classList.remove('mobile');
+      // Re-enable floating animations
+      const floatingCards = document.querySelectorAll('.floating-card');
+      floatingCards.forEach(card => {
+        card.style.animation = '';
+        card.style.transform = '';
+      });
     }
     
     if (isTablet) {
       document.body.classList.add('tablet');
+      // Adjust visual container for tablet
+      const visualContainer = document.querySelector('.visual-container');
+      if (visualContainer) {
+        visualContainer.style.flexDirection = 'row';
+        visualContainer.style.flexWrap = 'wrap';
+        visualContainer.style.justifyContent = 'center';
+      }
     } else {
       document.body.classList.remove('tablet');
+      // Reset visual container for desktop
+      const visualContainer = document.querySelector('.visual-container');
+      if (visualContainer) {
+        visualContainer.style.flexDirection = '';
+        visualContainer.style.flexWrap = '';
+        visualContainer.style.justifyContent = '';
+      }
     }
   }
 

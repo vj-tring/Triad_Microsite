@@ -124,6 +124,16 @@
   .section-container {
     padding: var(--space-12) var(--space-6);
   }
+
+  .what-is-triad-layout {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-6);
+  }
+  .what-is-triad-left,
+  .what-is-triad-right {
+    justify-self: stretch;
+    text-align: center;
+  }
 }
 
 @media (max-width: 900px) {
@@ -285,32 +295,30 @@
     left: 30px;
   }
 
-  .timeline-step {
+  .process-step {
     flex-direction: row !important;
-    padding-left: var(--space-16);
+    align-items: flex-start;
+    gap: var(--space-4);
   }
 
-  .timeline-step:nth-child(even) .step-content {
-    text-align: left;
+  .step-content {
+    width: 100%;
+    margin: 0;
   }
 
-  .step-marker {
-    position: absolute;
-    left: 0;
-    width: 60px;
-    height: 60px;
+  .step-icon {
+    margin-left: var(--space-4);
+    align-self: flex-start;
+  }
+
+  .process-step:not(:last-child)::after {
+    left: 24px;
+    top: 50px;
+    height: calc(100% - 30px);
   }
 
   .process-timeline.vertical-timeline::before {
     left: 30px;
-  }
-
-  .process-step {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-4);
-    min-height: 0;
-    padding-left: var(--space-20);
   }
 
   .step-number {
@@ -323,20 +331,8 @@
     font-size: var(--font-size-lg);
   }
 
-  .step-content {
-    margin: 0;
-    width: 100%;
-  }
-
-  .step-icon {
-    margin-left: 0;
-    align-self: flex-end;
-  }
-
-  .process-step:not(:last-child)::after {
-    left: 24px;
-    top: 50px;
-    height: calc(100% - 30px);
+  .step-content h3 {
+    font-size: var(--font-size-lg);
   }
 
   /* Results and Stats */
