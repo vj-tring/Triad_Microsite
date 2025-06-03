@@ -194,73 +194,92 @@ class TriadWebsite {
     
     let isMenuOpen = false;
     
-    // Initialize nav links
-    const links = navLinks.querySelectorAll('.nav-link');
-    links.forEach(link => {
-      link.style.opacity = '0';
-      link.style.transform = 'translateX(-20px)';
-      link.style.transition = 'all 0.3s ease';
-    });
+    // Function to check if on a mobile screen
+    const isMobileScreen = () => window.innerWidth <= 768;
+
+    // Initialize nav links visibility based on screen size
+    if (!isMobileScreen()) {
+      navLinks.style.display = 'flex'; // Ensure display is flex on desktop initially
+    } else {
+       navLinks.style.display = ''; // Let CSS handle display on mobile
+    }
     
     mobileToggle.addEventListener('click', () => {
-      isMenuOpen = !isMenuOpen;
-      this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
-    });
-    
-    // Close menu when clicking on nav links
-    navLinks.addEventListener('click', (e) => {
-      if (e.target.classList.contains('nav-link')) {
-        isMenuOpen = false;
+      // Only toggle if on a mobile screen
+      if (isMobileScreen()) {
+        isMenuOpen = !isMenuOpen;
         this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
-        
-        // Add active state to clicked link
-        links.forEach(link => link.classList.remove('active'));
-        e.target.classList.add('active');
       }
     });
     
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (isMenuOpen && !mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+    // Close menu when clicking on nav links (only on mobile)
+    navLinks.addEventListener('click', (e) => {
+      if (isMobileScreen() && e.target.classList.contains('nav-link')) {
         isMenuOpen = false;
         this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
+      }
+    });
+    
+    // Close menu when clicking outside (only on mobile)
+    document.addEventListener('click', (e) => {
+      if (isMobileScreen() && isMenuOpen && !mobileToggle.contains(e.target) && !navLinks.contains(e.target)) {
+        isMenuOpen = false;
+        this.toggleMobileMenu(isMenuOpen, mobileToggle, navLinks);
+      }
+    });
+
+    // Handle resize: show nav links on desktop, hide on mobile if menu is closed
+    window.addEventListener('resize', () => {
+      if (!isMobileScreen()) {
+        navLinks.style.display = 'flex'; // Always show on desktop
+        navLinks.classList.remove('mobile-open'); // Ensure mobile class is removed
+      } else {
+        // On mobile, let toggleMobileMenu manage display via classes
+        navLinks.style.display = '';
+         if (!isMenuOpen) {
+             navLinks.classList.remove('mobile-open');
+         }
       }
     });
   }
 
   toggleMobileMenu(isOpen, toggle, menu) {
     const hamburgerLines = toggle.querySelectorAll('.hamburger-line');
-    const navLinks = menu.querySelectorAll('.nav-link');
-    
-    if (isOpen) {
-      menu.classList.add('mobile-open');
-      toggle.classList.add('active');
-      hamburgerLines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      hamburgerLines[1].style.opacity = '0';
-      hamburgerLines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-      toggle.setAttribute('aria-expanded', 'true');
-      
-      // Animate nav links with stagger effect
-      navLinks.forEach((link, index) => {
-        setTimeout(() => {
-          link.style.opacity = '1';
-          link.style.transform = 'translateX(0)';
-        }, index * 100);
-      });
-    } else {
-      menu.classList.remove('mobile-open');
-      toggle.classList.remove('active');
-      hamburgerLines[0].style.transform = '';
-      hamburgerLines[1].style.opacity = '';
-      hamburgerLines[2].style.transform = '';
-      toggle.setAttribute('aria-expanded', 'false');
-      
-      // Reset nav links
-      navLinks.forEach(link => {
-        link.style.opacity = '0';
-        link.style.transform = 'translateX(-20px)';
-      });
+    // Only apply mobile toggle styles if on a mobile screen
+    if (window.innerWidth <= 768) {
+      const navLinks = menu.querySelectorAll('.nav-link'); // Select links inside the menu
+
+      if (isOpen) {
+        menu.classList.add('mobile-open');
+        toggle.classList.add('active');
+        hamburgerLines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        hamburgerLines[1].style.opacity = '0';
+        hamburgerLines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+        toggle.setAttribute('aria-expanded', 'true');
+
+        // Animate nav links with stagger effect
+        navLinks.forEach((link, index) => {
+          setTimeout(() => {
+            link.style.opacity = '1';
+            link.style.transform = 'translateX(0)';
+          }, index * 100);
+        });
+      } else {
+        menu.classList.remove('mobile-open');
+        toggle.classList.remove('active');
+        hamburgerLines[0].style.transform = '';
+        hamburgerLines[1].style.opacity = '';
+        hamburgerLines[2].style.transform = '';
+        toggle.setAttribute('aria-expanded', 'false');
+
+        // Reset nav links styles when closing
+          navLinks.forEach(link => {
+              link.style.opacity = ''; // Let CSS handle opacity
+              link.style.transform = ''; // Let CSS handle transform
+          });
+      }
     }
+    // On desktop, this function does nothing, CSS manages visibility
   }
 
   // Advanced Navigation with Smooth Scrolling

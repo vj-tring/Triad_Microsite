@@ -2285,3 +2285,9 @@ body {
 .section#what-is-triad .what-is-triad-right,
 .section#about .about-right {
 }
+
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex !important;
+  }
+}

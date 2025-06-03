@@ -616,7 +616,6 @@
   }
 }
 
-/* Extra Small Devices */
 @media (max-width: 375px) {
   :root {
     --space-3: 0.5rem;
@@ -651,7 +650,6 @@
   }
 }
 
-/* Landscape Mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .hero-section {
     min-height: auto;
@@ -674,7 +672,6 @@
   }
 }
 
-/* Touch Improvements */
 @media (hover: none) and (pointer: coarse) {
   .nav-link,
   .cta-primary,
@@ -699,7 +696,6 @@
   }
 }
 
-/* High Contrast Mode */
 @media (prefers-contrast: high) {
   :root {
     --color-border: var(--color-gray-400);
@@ -713,7 +709,6 @@
   }
 }
 
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -733,7 +728,6 @@
   }
 }
 
-/* Print Styles */
 @media print {
   .navbar,
   .hero-particles,
@@ -753,3 +747,6 @@
     padding: var(--space-8) 0;
   }
 }
+
+/* Ensure nav-links is always flex by default */
+/* Removed potentially conflicting rule */
