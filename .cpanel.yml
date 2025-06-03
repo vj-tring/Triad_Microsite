@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/username/public_html/
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R .env* $DEPLOYPATH
+    - /bin/cp -R .htaccess $DEPLOYPATH
+    - /bin/cp -R backend/* $DEPLOYPATH/backend/
+    - /bin/cp -R public/* $DEPLOYPATH/public/
+    - /bin/cp -R styles.css $DEPLOYPATH/
+    - /bin/cp -R script.js $DEPLOYPATH/
+    - /bin/cp -R index.html $DEPLOYPATH/
+    - /bin/cp -R responsive.css $DEPLOYPATH/
