@@ -1,11 +1,37 @@
 RewriteEngine On
 
-# Redirect all requests to Node.js application
+# Handle Python/Flask application
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
+RewriteRule ^api/(.*)$ app.py/$1 [QSA,L]
+RewriteRule ^(.*)$ app.py/$1 [QSA,L]
 
 # Enable CORS
 Header set Access-Control-Allow-Origin "*"
 Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-Header set Access-Control-Allow-Headers "Content-Type, Authorization" 
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+Header set Access-Control-Allow-Credentials "true"
+
+# Set Python handler
+AddHandler fcgid-script .py
+FcgidInitialEnv PYTHONPATH /home/b7okp87qtv01/public_html
+FcgidInitialEnv PATH /usr/local/bin:/usr/bin:/bin
+FcgidInitialEnv FLASK_APP app.py
+FcgidInitialEnv FLASK_ENV production
+FcgidInitialEnv FLASK_DEBUG 1
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Handle OPTIONS requests
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# Ensure Python files are executed
+<FilesMatch "\.py$">
+    SetHandler fcgid-script
+    Options +ExecCGI
+</FilesMatch>

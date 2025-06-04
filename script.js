@@ -583,7 +583,7 @@ class TriadWebsite {
         throw new Error(result.message || 'Failed to send message');
       }
 
-      this.showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+      this.showToast('Thank you! We\'ll get back to you soon.', 'success');
       form.reset();
     } catch (error) {
       console.error('Error submitting form:', error);
