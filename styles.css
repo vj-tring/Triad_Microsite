@@ -2286,6 +2286,10 @@ body {
 .section#about .about-right {
 }
 
+.what-is-triad-text p:not(:last-child) {
+  margin-bottom: var(--space-5); /* Adjust the space as needed */
+}
+
 @media (min-width: 769px) {
   .nav-links {
     display: flex !important;
