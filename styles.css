@@ -7,7 +7,7 @@
   --color-secondary: #4a90e2;
   --color-accent: #f8e71c;
   --color-success: #10b981;
-  --color-warning: #f5a623;
+  --color-warning: #f5a62b;
   --color-error: #ef4444;
   
   /* Neutral Colors */
@@ -67,7 +67,7 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
   
@@ -235,15 +235,15 @@ body {
   left: 0;
   right: 0;
   z-index: var(--z-fixed);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-base);
+  transition: background-color var(--transition-base);
 }
 
 [data-theme="dark"] .navbar {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -962,29 +962,30 @@ body {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
   position: relative;
   z-index: 1;
+  margin-top: 2rem;
 }
 
 .service-card {
   background: var(--color-card-bg);
   border-radius: 20px;
   box-shadow: var(--shadow-md);
-  padding: 0rem 2rem 0rem 2rem;
+  padding: 2rem;
   border: 1px solid var(--color-border);
   position: relative;
   overflow: visible;
   transition: box-shadow 0.3s, transform 0.3s;
-  min-height: 520px;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .service-card:hover {
-  transform: translateY(-20px);
+  transform: translateY(-10px);
   box-shadow: var(--shadow-xl);
 }
 
@@ -1010,7 +1011,7 @@ body {
   position: absolute;
   top: -24px;
   left: 2rem;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: #fff;
   z-index: 2;
 }
@@ -1028,7 +1029,7 @@ body {
 }
 
 .service-card h3 {
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text-primary);
@@ -1061,6 +1062,7 @@ body {
   line-height: 1.7;
   text-align: left;
   font-size: 1rem;
+  flex-grow: 1;
 }
 
 .service-features {
@@ -1069,15 +1071,20 @@ body {
   margin: 0;
   margin-top: 0.5rem;
   text-align: left;
+  width: 100%;
 }
 
 .service-features li {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   color: var(--color-text-secondary);
   font-size: 1rem;
+}
+
+.service-features li:last-child {
+    margin-bottom: 0;
 }
 
 .service-card[data-service="seo"] .service-features i {
@@ -1105,9 +1112,26 @@ body {
 @media (max-width: 900px) {
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 3rem;
   }
+  
   .service-card {
-    min-height: unset;
+    min-height: auto;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    padding: 1.5rem;
+  }
+  
+  .service-icon {
+    left: 1.5rem;
+  }
+  
+  .service-card h3 {
+    margin-top: 1.5rem;
   }
 }
 
@@ -2294,4 +2318,342 @@ body {
   .nav-links {
     display: flex !important;
   }
+}
+
+/* Floating Contact Form */
+.floating-contact {
+    position: fixed;
+    /* Base positioning - will be overridden by sticky-right-tab */
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1050;
+    display: block;
+    transition: transform var(--transition-base);
+}
+
+.floating-contact.hidden {
+    /* Base hidden state - will be overridden by sticky-right-tab */
+    transform: translateY(150%);
+}
+
+/* Sticky Right Tab Styling */
+.floating-contact.sticky-right-tab {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.floating-contact.sticky-right-tab:hover .floating-contact-form {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: var(--space-4) var(--space-2);
+    cursor: pointer;
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    box-shadow: var(--shadow-md);
+    height: auto;
+    width: 35px;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    transition: all 0.3s ease;
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button:hover {
+    background: var(--color-primary-dark);
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button .button-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.floating-contact.sticky-right-tab .floating-contact-form {
+    position: absolute;
+    right: 100%;
+    top: 10%;
+    transform: translateY(-50%) translateX(20px);
+    background: var(--color-white);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 320px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1049;
+}
+
+.floating-contact.sticky-right-tab.active .floating-contact-form {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    line-height: 1.6;
+    overflow: visible;
+}
+
+.floating-contact.sticky-right-tab.hidden {
+    /* Adjust hidden state for sticky tab - slide out to the right */
+    transform: translateY(-50%) translateX(100%);
+}
+
+/* Hide button when form is active for sticky tab */
+.floating-contact.sticky-right-tab.active .floating-contact-button {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Base Floating Contact Button */
+.floating-contact-button {
+    display: flex; /* Default button display */
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50px; /* Default button shape */
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-base);
+    position: relative;
+    z-index: 1; /* Ensure button is above form when closed */
+}
+
+/* Adjust button style for sticky right tab */
+.floating-contact.sticky-right-tab .floating-contact-button {
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners only on the left */
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-md);
+    height: auto;
+    width: 40px; /* Allow width to adjust to content */
+    transform: none;
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button:hover {
+     transform: translateX(-5px); /* Hover slides the tab slightly left */
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button .button-text {
+    font-size: var(--font-size-sm);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+
+/* Ensure default hover is overridden by sticky tab hover */
+.floating-contact-button:hover {
+    transform: translateY(-2px); /* Default hover effect */
+    box-shadow: var(--shadow-xl);
+}
+
+.floating-contact.sticky-right-tab .floating-contact-button:hover {
+     transform: translateX(-5px); /* Sticky tab hover effect */
+}
+
+.floating-contact-button i {
+    font-size: 1.25rem;
+}
+
+.floating-contact-button .button-text {
+    font-weight: 500;
+}
+
+/* Base Floating Contact Form */
+.floating-contact-form {
+    position: absolute; /* Default form positioning - will be overridden */
+    bottom: 0;
+    right: 0;
+    width: 450px; /* Default form width */
+    background: var(--color-bg-primary);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-xl);
+    padding: 1rem; /* Default form padding */
+    transform: scale(0.95); /* Default entry animation */
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    transform-origin: bottom right;
+    z-index: 1; /* Ensure form is above page content */
+    line-height: 1.6; /* Restore default line height */
+}
+
+/* Adjust form style for sticky right tab */
+.floating-contact.sticky-right-tab .floating-contact-form {
+    position: relative; /* Position relative to parent flex container */
+    bottom: auto; /* Remove absolute positioning */
+    right: auto; /* Remove absolute positioning */
+    border-radius: 1rem 0 0 1rem; /* Rounded corners only on the left */
+    height: auto; /* Allow height to adjust to content */
+    /* Initial state: hidden, zero flex-basis, no padding, translated out */
+    flex-basis: 0; 
+    flex-grow: 0;
+    flex-shrink: 1; /* Allow shrinking */
+    width: 0; /* Explicitly set width to 0 */
+    padding: 1.5rem 0; /* Keep vertical padding, set horizontal to 0 */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%); 
+    transition: all var(--transition-base);
+    transform-origin: right center; /* Scale/transform from the right edge */
+    line-height: 1.6; /* Ensure proper line height */
+    overflow: hidden; /* Hide content that exceeds zero width */
+    background: var(--color-bg-primary); /* Revert to theme background */
+    border: 1px solid var(--color-border); /* Revert to theme border */
+    box-shadow: var(--shadow-xl); /* Revert to theme shadow */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.floating-contact.sticky-right-tab.active .floating-contact-form {
+    /* Active state: visible, defined flex-basis, full padding, translated in */
+    flex-basis: 400px; /* Set form width when active */
+    flex-grow: 1; /* Allow growing */
+    flex-shrink: 1; /* Allow shrinking */
+    width: 400px; /* Also set width for explicit control */
+    padding: 1.5rem; /* Add full padding when active */
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0); /* Slide into view */
+    line-height: 0.5;
+    overflow: visible; /* Allow content overflow when visible if needed */
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #f5a623;
+}
+
+.close-form {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all var(--transition-base);
+}
+
+.close-form:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+}
+
+.floating-contact-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.floating-contact-form .form-input,
+.floating-contact-form .form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: all var(--transition-base);
+}
+
+.floating-contact-form .form-input:focus,
+.floating-contact-form .form-textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.floating-contact-form .form-submit {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    /* Adjust sticky tab for smaller screens */
+    .floating-contact.sticky-right-tab {
+        display: flex; /* Ensure container is flex */
+    }
+
+    .floating-contact.sticky-right-tab.hidden {
+    }
+
+    .floating-contact.sticky-right-tab .floating-contact-button {
+    }
+
+     .floating-contact.sticky-right-tab.active .floating-contact-form {
+        width: 300px; /* Adjust form width for tablets */
+        flex-basis: 300px;
+        padding: 1rem;
+        line-height: 1.6;
+        overflow: visible;
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Existing floating contact styles for < 768px (keep if needed for non-sticky) */
+    .floating-contact {
+    }
+
+    .floating-contact-button {
+    }
+
+    .floating-contact-button .button-text {
+    }
+
+    .floating-contact-form {
+         line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+     /* Adjust sticky tab for mobile screens */
+    .floating-contact.sticky-right-tab {
+        display: flex; /* Ensure container is flex */
+    }
+
+     .floating-contact.sticky-right-tab.hidden {
+    }
+
+    .floating-contact.sticky-right-tab .floating-contact-button {
+    }
+
+    .floating-contact.sticky-right-tab .floating-contact-button i {
+    }
+
+     .floating-contact.sticky-right-tab.active .floating-contact-form {
+        width: calc(100vw - 40px); /* Adjust form width for mobile */
+        flex-basis: calc(100vw - 40px);
+        padding: 0.75rem;
+        line-height: 1.6;
+        overflow: visible;
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
 }

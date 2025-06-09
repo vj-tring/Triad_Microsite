@@ -7,6 +7,11 @@ class TriadWebsite {
     this.scrollPosition = 0;
     this.animations = new Map();
     this.observers = new Map();
+    this.floatingContact = null;
+    this.floatingContactButton = null;
+    this.floatingContactForm = null;
+    this.closeFloatingForm = null;
+    this.contactSection = null;
     
     this.init();
   }
@@ -35,6 +40,7 @@ class TriadWebsite {
     this.setupPerformanceOptimizations();
     this.setupVectorAnimations();
     this.setupMobileMenu();
+    this.setupFloatingContact();
     
     // Complete loading sequence
     setTimeout(() => this.completeLoading(), 1500);
@@ -302,7 +308,6 @@ class TriadWebsite {
     });
     
     // Navbar background on scroll
-    let lastScrollY = window.scrollY;
     let ticking = false;
     
     const updateNavbar = () => {
@@ -315,19 +320,11 @@ class TriadWebsite {
         navbar.style.backdropFilter = 'blur(20px)';
       } else {
         navbar.style.background = this.currentTheme === 'dark'
-          ? 'rgba(0, 0, 0, 0.3)'
-          : 'rgba(255, 255, 255, 0.1)';
+          ? 'rgba(0, 0, 0, 0.8)'
+          : 'rgba(255, 255, 255, 0.8)';
         navbar.style.backdropFilter = 'blur(20px)';
       }
       
-      // Hide/show navbar on scroll
-      if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        navbar.style.transform = 'translateY(-100%)';
-      } else {
-        navbar.style.transform = 'translateY(0)';
-      }
-      
-      lastScrollY = currentScrollY;
       ticking = false;
     };
     
@@ -1116,144 +1113,127 @@ class TriadWebsite {
       liveRegion.remove();
     }
   }
+
+  setupFloatingContact() {
+    const floatingContact = document.getElementById('floatingContact');
+    const floatingContactButton = document.getElementById('floatingContactButton'); // Get the button element
+    const floatingForm = document.getElementById('floatingContactForm');
+    const closeButton = document.getElementById('closeFloatingForm');
+    let isHovering = false; // Keep track of hover state for opening
+    let hoverTimeout;
+
+    if (!floatingContact || !floatingContactButton || !floatingForm || !closeButton) return; // Added check for button
+
+    // Function to check if on a mobile or tablet screen
+    const isMobileOrTablet = () => window.innerWidth <= 1024; // Assuming 1024px is the breakpoint for tablet
+
+    // Handle hover state to open the form on desktop
+    floatingContact.addEventListener('mouseenter', () => {
+        // Only trigger hover on larger screens
+        if (!isMobileOrTablet()) {
+           isHovering = true;
+           floatingContact.classList.add('active');
+        }
+    });
+
+    floatingContact.addEventListener('mouseleave', () => {
+        // Keep track of mouse leaving for potential future use, but do NOT close the form here based on hover
+        isHovering = false;
+    });
+
+    // Handle click on the button to toggle form visibility on mobile/tablet
+    floatingContactButton.addEventListener('click', () => {
+        // Toggle 'active' class on click, primarily for touch devices
+        floatingContact.classList.toggle('active');
+    });
+
+    // Handle click outside
+    document.addEventListener('click', (event) => {
+        // Check if the click target is outside the floating contact container
+        // Added condition to prevent closing if clicking the button itself
+        if (floatingContact.classList.contains('active') && !floatingContact.contains(event.target) && event.target !== floatingContactButton) {
+            floatingContact.classList.remove('active');
+        }
+    });
+
+    // Handle scroll - close the form
+    window.addEventListener('scroll', () => {
+        // If the form is active and the user scrolls, close the form.
+        if (floatingContact.classList.contains('active')) {
+            floatingContact.classList.remove('active');
+        }
+    }, { passive: true }); // Use passive: true for better scroll performance
+
+    // Handle close button - close the form
+    closeButton.addEventListener('click', () => {
+        floatingContact.classList.remove('active');
+    });
+
+    // Handle form submission (existing logic remains)
+    const form = document.getElementById('floatingContactFormElement');
+    const submitButton = document.getElementById('floatingSubmitButton');
+
+    if (form && submitButton) { // Added check for form elements
+      form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          await this.handleFormSubmission(form, submitButton);
+      });
+
+      // Setup form validation (existing logic remains)
+      const formInputs = form.querySelectorAll('input, textarea');
+      formInputs.forEach(input => {
+          input.addEventListener('blur', () => {
+              this.validateField(input);
+          });
+          input.addEventListener('input', () => {
+              this.clearFieldError(input);
+          });
+      });
+    }
+
+     // Initial state: hide the floating contact if the contact section is visible on load
+     // This logic was previously in a separate observer, integrating here.
+     const contactSection = document.getElementById('contact');
+     if (contactSection) {
+         const initialObserver = new IntersectionObserver((entries) => {
+             entries.forEach(entry => {
+                 if (entry.isIntersecting) {
+                     floatingContact.classList.add('hidden');
+                 } else {
+                     floatingContact.classList.remove('hidden');
+                 }
+             });
+         }, { threshold: 0.5 });
+
+         initialObserver.observe(contactSection);
+
+         // Also ensure it hides if contact section comes into view later
+         const scrollObserver = new IntersectionObserver((entries) => {
+             entries.forEach(entry => {
+                 if (entry.isIntersecting) {
+                     floatingContact.classList.add('hidden');
+                     // Optionally close the form if it's open when contact section comes into view
+                     if (floatingContact.classList.contains('active')) {
+                         floatingContact.classList.remove('active');
+                     }
+                 } else {
+                     floatingContact.classList.remove('hidden');
+                 }
+             });
+         }, { threshold: 0.5 }); // Adjust threshold as needed
+         scrollObserver.observe(contactSection);
+     }
+  }
 }
-
-// CSS Animation Definitions
-const animationStyles = `
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
-  }
-  
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  
-  .keyboard-navigation *:focus {
-    outline: 2px solid var(--color-primary) !important;
-    outline-offset: 2px !important;
-  }
-  
-  /* Mobile Menu Styles */
-  @media (max-width: 768px) {
-    .nav-links {
-      position: fixed;
-      top: 80px;
-      left: 0;
-      width: 100%;
-      height: calc(100vh - 80px);
-      background: var(--color-bg-primary);
-      backdrop-filter: blur(20px);
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 2rem;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 999;
-      border-top: 1px solid var(--color-border);
-    }
-    
-    .nav-links.mobile-open {
-      transform: translateX(0);
-    }
-    
-    .nav-link {
-      padding: 1rem 0;
-      font-size: 1.2rem;
-      width: 100%;
-      text-align: center;
-      border-bottom: 1px solid var(--color-border);
-    }
-    
-    .nav-link:last-child {
-      border-bottom: none;
-    }
-  }
-  
-  /* Toast Close Button */
-  .toast-close {
-    background: none;
-    border: none;
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    padding: 0.25rem;
-    margin-left: auto;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease;
-  }
-  
-  .toast-close:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Enhanced Form Error Styles */
-  .form-input.error,
-  .form-select.error,
-  .form-textarea.error {
-    border-color: var(--color-error);
-    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-  }
-  
-  /* Loading States */
-  .loading {
-    pointer-events: none;
-    opacity: 0.7;
-  }
-  
-  /* Responsive Utilities */
-  .mobile .floating-card {
-    position: relative !important;
-    transform: none !important;
-    animation: none !important;
-    margin-bottom: 1rem;
-  }
-  
-  .mobile .hero-visual {
-    height: auto;
-    margin-top: 2rem;
-  }
-  
-  .mobile .visual-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-// Inject animation styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = animationStyles;
-document.head.appendChild(styleSheet);
 
 // Initialize the website
 const triadWebsite = new TriadWebsite();
 
-// Export for potential external use
-window.TriadWebsite = triadWebsite;
-
 // Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
-    // Pause animations when page is not visible
     document.body.classList.add('page-hidden');
   } else {
-    // Resume animations when page becomes visible
     document.body.classList.remove('page-hidden');
   }
 });
@@ -1272,13 +1252,3 @@ window.addEventListener('unhandledrejection', (event) => {
   console.error('Unhandled promise rejection:', event.reason);
   triadWebsite.showToast('Something went wrong. Please try again.', 'error');
 });
-
-// Performance monitoring
-if ('performance' in window) {
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const perfData = performance.getEntriesByType('navigation')[0];
-      console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-    }, 0);
-  });
-}
