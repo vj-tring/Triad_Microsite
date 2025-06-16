@@ -41,6 +41,7 @@ class TriadWebsite {
     this.setupVectorAnimations();
     this.setupMobileMenu();
     this.setupFloatingContact();
+    this.setupTypedAnimation();
     
     // Complete loading sequence
     setTimeout(() => this.completeLoading(), 1500);
@@ -150,17 +151,9 @@ class TriadWebsite {
 
   // Theme Management with System Preference Detection
   setupThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    // Always set to light on load
-    this.setTheme('light');
-
-    // Handle theme toggle (if you want to allow manual switching)
-    themeToggle?.addEventListener('click', () => {
-      const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-      this.setTheme(newTheme);
-      this.triggerThemeTransition();
-    });
-    // Do NOT listen for system theme changes
+    // Always set to dark on load
+    this.setTheme('dark');
+    // Remove or comment out any code that allows toggling to light
   }
 
   setTheme(theme) {
@@ -427,16 +420,21 @@ class TriadWebsite {
     const animationType = element.getAttribute('data-animate');
     const delay = parseInt(element.getAttribute('data-delay')) || 0;
     
+    console.log(`Triggering animation for element: ${element.id || element.className}, Type: ${animationType}, Delay: ${delay}`);
+
     setTimeout(() => {
       element.classList.add('animate');
+      console.log(`Class 'animate' added to: ${element.id || element.className}`);
       
       // Handle stagger children animation
       if (animationType === 'staggerChildren') {
         const children = Array.from(element.children);
+        console.log(`Staggering children for: ${element.id || element.className}, Number of children: ${children.length}`);
         children.forEach((child, index) => {
           setTimeout(() => {
             child.style.transitionDelay = `${index * 100}ms`;
             child.classList.add('animate');
+            console.log(`Child animated: ${child.className}, Delay: ${index * 100}ms`);
           }, index * 100);
         });
       }
@@ -481,29 +479,47 @@ class TriadWebsite {
 
   // Form Handling with Validation
   setupFormHandling() {
+    // Main contact form
     const form = document.getElementById('contactForm');
-    if (!form) return;
-    
-    const submitButton = document.getElementById('submitButton');
-    const inputs = form.querySelectorAll('input, select, textarea');
-    
-    // Real-time validation
-    inputs.forEach(input => {
-      input.addEventListener('blur', () => this.validateField(input));
-      input.addEventListener('input', () => this.clearFieldError(input));
-    });
-    
-    // Form submission
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.handleFormSubmission(form, submitButton);
-    });
+    if (form) {
+      const submitButton = document.getElementById('submitButton');
+      const inputs = form.querySelectorAll('input, select, textarea');
+      // Real-time validation
+      inputs.forEach(input => {
+        input.addEventListener('blur', () => this.validateField(input));
+        input.addEventListener('input', () => this.clearFieldError(input));
+      });
+      // Form submission
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.handleFormSubmission(form, submitButton);
+      });
+    }
+
+    // Hero contact form (first form)
+    const heroForm = document.getElementById('heroContactForm');
+    if (heroForm) {
+      const heroSubmitButton = document.getElementById('heroSubmitButton');
+      const heroInputs = heroForm.querySelectorAll('input, select, textarea');
+      // Real-time validation
+      heroInputs.forEach(input => {
+        input.addEventListener('blur', () => this.validateField(input));
+        input.addEventListener('input', () => this.clearFieldError(input));
+      });
+      // Form submission
+      heroForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.handleFormSubmission(heroForm, heroSubmitButton);
+      });
+    }
   }
 
   validateField(field) {
     const value = field.value.trim();
     const fieldName = field.name;
-    const errorElement = document.getElementById(`${fieldName}-error`);
+    // Get the error element ID from aria-describedby
+    const errorElementId = field.getAttribute('aria-describedby');
+    const errorElement = errorElementId ? document.getElementById(errorElementId) : null;
     
     let errorMessage = '';
     
@@ -525,7 +541,9 @@ class TriadWebsite {
   }
 
   clearFieldError(field) {
-    const errorElement = document.getElementById(`${field.name}-error`);
+    // Get the error element ID from aria-describedby
+    const errorElementId = field.getAttribute('aria-describedby');
+    const errorElement = errorElementId ? document.getElementById(errorElementId) : null;
     if (errorElement) {
       errorElement.textContent = '';
       errorElement.classList.remove('visible');
@@ -1102,6 +1120,8 @@ class TriadWebsite {
 
   // Cleanup methods
   destroy() {
+    // Cleanup all event listeners, observers, and timeouts
+    console.log('TriadWebsite: Destroying instance.');
     // Remove all event listeners and observers
     this.observers.forEach(observer => observer.disconnect());
     this.observers.clear();
@@ -1224,10 +1244,37 @@ class TriadWebsite {
          scrollObserver.observe(contactSection);
      }
   }
+
+  // Typed.js Animation Setup
+  setupTypedAnimation() {
+    console.log('Attempting to setup Typed.js animation.');
+    if (typeof Typed === 'undefined') {
+      console.error('Typed.js library is not loaded!');
+      return;
+    }
+    const autoTypeElement = document.querySelector('.auto-type');
+    if (autoTypeElement) {
+      console.log('Found .auto-type element, initializing Typed.js...');
+      new Typed(autoTypeElement, {
+        strings: ['Digital Marketing Strategy'],
+        typeSpeed: 30,
+        backSpeed: 0,
+        backDelay: 0,
+        startDelay: 200,
+        showCursor: false,
+        loop: false
+      });
+    } else {
+      console.warn('Could not find .auto-type element.');
+    }
+  }
 }
 
-// Initialize the website
-const triadWebsite = new TriadWebsite();
+// Initialize the website application
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded event fired. Initializing TriadWebsite.');
+  window.triadApp = new TriadWebsite();
+});
 
 // Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
@@ -1240,15 +1287,15 @@ document.addEventListener('visibilitychange', () => {
 
 // Handle online/offline status
 window.addEventListener('online', () => {
-  triadWebsite.showToast('Connection restored', 'success');
+  triadApp.showToast('Connection restored', 'success');
 });
 
 window.addEventListener('offline', () => {
-  triadWebsite.showToast('Connection lost', 'warning');
+  triadApp.showToast('Connection lost', 'warning');
 });
 
 // Handle unhandled promise rejections
 window.addEventListener('unhandledrejection', (event) => {
   console.error('Unhandled promise rejection:', event.reason);
-  triadWebsite.showToast('Something went wrong. Please try again.', 'error');
+  triadApp.showToast('Something went wrong. Please try again.', 'error');
 });
