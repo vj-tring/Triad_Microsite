@@ -721,13 +721,13 @@ body {
 }
 
 .hero-bottom-carousel .client-logo {
-  height: 65px; /* Increased from 45px */
-  width: auto;
-  filter: grayscale(100%) brightness(0.9) contrast(1.2);
-  opacity: 0.8;
-  transition: none;
-  pointer-events: none;
-  flex-shrink: 0;
+   height: 85px;
+   width: auto;
+   filter: grayscale(100%) brightness(0.9) contrast(1.2);
+   opacity: 0.8;
+   transition: none;
+   pointer-events: none;
+   flex-shrink: 0;
 }
 
 @keyframes heroBottomScroll {
@@ -3385,7 +3385,7 @@ body, .section-container, .hero-section, .services-section, .results-section, .f
   margin-left: 6rem;
   width: 350px;
   z-index: 2;
-  margin-top: -2rem; /* Add negative margin to move it up */
+  margin-top: -50px; 
 }
 
 @media (max-width: 1024px) {
