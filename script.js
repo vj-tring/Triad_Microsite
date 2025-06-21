@@ -45,6 +45,11 @@ class TriadWebsite {
     
     // Complete loading sequence
     setTimeout(() => this.completeLoading(), 1500);
+    
+    // Ensure responsive styles are applied on first load (fix for mobile view bug)
+    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+      this.handleResize();
+    }
   }
 
   // Loading Skeleton Management
