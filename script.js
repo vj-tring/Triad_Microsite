@@ -50,6 +50,54 @@ class TriadWebsite {
     if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
       this.handleResize();
     }
+
+    // Address slider logic
+    const slider = document.getElementById('contactAddressSlider');
+    if (slider) {
+      const track = slider.querySelector('.address-slider-track');
+      const slides = track.querySelectorAll('.address-slide');
+      const prevBtn = document.getElementById('addressSliderPrev');
+      const nextBtn = document.getElementById('addressSliderNext');
+      let current = 0;
+      function updateSlider() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        slides.forEach((slide, idx) => {
+          if (idx === current) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+      }
+      function nextSlide() {
+        current = (current + 1) % slides.length;
+        updateSlider();
+      }
+      function prevSlide() {
+        current = (current - 1 + slides.length) % slides.length;
+        updateSlider();
+      }
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+      }
+      // Keyboard navigation for address slider
+      slider.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextSlide();
+        }
+      });
+      // Make slider focusable for keyboard events
+      slider.setAttribute('tabindex', '0');
+      // Optional: auto-slide every 6 seconds
+      setInterval(nextSlide, 6000);
+      // Initialize position
+      updateSlider();
+    }
   }
 
   // Loading Skeleton Management
@@ -517,6 +565,21 @@ class TriadWebsite {
         this.handleFormSubmission(heroForm, heroSubmitButton);
       });
     }
+
+    // Main contact form in contact section
+    const mainForm = document.getElementById('mainContactForm');
+    if (mainForm) {
+      const mainSubmitButton = document.getElementById('mainSubmitButton');
+      const mainInputs = mainForm.querySelectorAll('input, select, textarea');
+      mainInputs.forEach(input => {
+        input.addEventListener('blur', () => this.validateField(input));
+        input.addEventListener('input', () => this.clearFieldError(input));
+      });
+      mainForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.handleFormSubmission(mainForm, mainSubmitButton);
+      });
+    }
   }
 
   validateField(field) {
@@ -575,6 +638,20 @@ class TriadWebsite {
   }
 
   async handleFormSubmission(form, submitButton) {
+    // Validate all required fields before submission
+    const formInputs = form.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+    formInputs.forEach(input => {
+      if (!this.validateField(input)) {
+        isValid = false;
+      }
+    });
+
+    if (!isValid) {
+      this.showToast('Please fill in all required fields.', 'error');
+      return;
+    }
+
     const formData = new FormData(form);
     const data = {
       name: formData.get('name'),
@@ -597,7 +674,13 @@ class TriadWebsite {
         body: JSON.stringify(data)
       });
 
-      const result = await response.json();
+      let result;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        throw new Error('Invalid response from server');
+      }
 
       if (!response.ok) {
         throw new Error(result.message || 'Failed to send message');
