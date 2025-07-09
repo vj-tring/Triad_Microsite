@@ -334,6 +334,7 @@ body {
     max-width: 280px;
     justify-content: center;
     padding: var(--space-4) var(--space-6);
+    margin-right: 0;
   }
 
   /* Services Section */

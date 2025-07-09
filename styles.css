@@ -642,6 +642,7 @@ body {
   background: linear-gradient(135deg, #f5a623, #ffe066);
   color: #18181b;
   box-shadow: var(--shadow-lg);
+  margin-right: 175px
 }
 
 .cta-primary:hover {
