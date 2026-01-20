@@ -1341,7 +1341,6 @@ body {
 
 /* About Section - Left Aligned with Illustration */
 .about-section {
-  background: var(--color-bg-primary);
   position: relative;
   overflow: hidden;
 }
